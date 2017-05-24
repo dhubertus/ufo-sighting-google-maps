@@ -1,17 +1,41 @@
-body {
+html,
+body,
+#main {
   background: #f4f4f4;
   font-family: sans-serif;
   font-weight: 100;
+  height: 100%;
+  width: 100%;
 }
 
-#main h1 {
-  padding: 20px;
-  border-bottom: 1px dashed #aaa;
-  color: rgba(0,0,0,0.6);
-  font-weight: 100;
-  font-family: sans-serif;
+#app-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#main {
-  text-align: center;
+#header-container {
+  width: 100%;
+  height: 100px;
+  background-color: blue;
+}
+
+#aside-container {
+  height: 600px;
+  width: 20%;
+  background-color: maroon;
+}
+
+/*NOTE: MapContianer CSS*/
+.containerElement {
+  width: 80%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #032459;
+}
+
+.mapelement {
+  height: 90%;
+  width: 90%;
 }
