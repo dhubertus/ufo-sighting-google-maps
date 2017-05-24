@@ -8,17 +8,24 @@ import { initialScrubber } from './helpers/initialScrubber.js'
 import stubbedData from './helpers/stubbedApiCall.js'
 
 class Root extends Component {
-  componentDidMount() {
+  constructor() {
+    super()
+    this.state={
+      sightings: {}
+    }
+  }
+  componentWillMount() {
     // NOTE: INSERT API CALL TO YOUR INTERNAL API
 
-  //     fetch( '/api/places', {
-  //       method: 'GET'
-  //     })
-  //     .then(resp => resp.json())
-  //     .then(obj => console.log(obj))
+      // fetch( '/api/places', {
+      //   method: 'GET'
+      // })
+      // .then(resp => resp.json())
+      // .then(obj => this.setState({sightings: initialScrubber(stubbedData)}))
 
   const thing = initialScrubber(stubbedData)
-  console.log(thing);
+  console.log('scrubber check:',thing);
+  this.setState({sightings: initialScrubber(stubbedData)})
   }
 
 
@@ -30,7 +37,9 @@ class Root extends Component {
         <AsideContainer />
         <MapContainer
           mapElement={ <div className='mapelement' /> }
-          containerElement={ <div className='containerElement' /> }/>
+          containerElement={ <div className='containerElement'/> }
+          sightings={this.state.sightings}
+        />
       </div>
     )
   }
