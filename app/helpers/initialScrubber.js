@@ -13,6 +13,9 @@ export const initialScrubber = (api) => {
       acc[obj._id].month = obj.date.slice(5,7)
       acc[obj._id].shape = obj.shape
       acc[obj._id].summary = obj.summary
+      acc[obj._id].url = obj.url
+      acc[obj._id].info = 'false'
+
     }
     return acc
   }, {})

@@ -1,16 +1,25 @@
 import React from 'react'
 
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 
 
-const MapContainer = withGoogleMap(({ sightings, openInfoBox }) => {
-
+const MapContainer = withGoogleMap(({ sightings, clickInfoBox }) => {
     const pinsArray = Object.keys(sightings).map((claim, i) => {
-      return <Marker
+      return  <Marker
                 key={i}
                 position={{ lat: sightings[claim].latitude , lng: sightings[claim].longitude }}
-                onClick={() => openInfoBox()}
-              />
+                onClick={() => clickInfoBox(claim)}
+                icon={'../../assets/styles/images/et.png'}
+              >
+                {sightings[claim].info === 'true' && (
+                  <InfoWindow onCloseClick={()=> clickInfoBox(claim)}>
+                    <div>
+                      <div>{sightings[claim].summary}</div>
+                      <a href={sightings[claim].url} target='_blank'>{'Read More'}</a>
+                  </div>
+                  </InfoWindow>
+                )}
+              </Marker>
     })
 
   return (
