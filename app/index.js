@@ -11,8 +11,10 @@ import stubbedData from './helpers/stubbedApiCall.js'
 class Root extends Component {
   constructor(props) {
     super(props)
-    this.state={
-      sightings: {}
+    this.state = {
+      nearSightings: {},
+      initialSightings: {},
+      viewing: {}
     }
   }
 
@@ -24,22 +26,25 @@ class Root extends Component {
     // })
     // .then(resp => resp.json())
     // .then((obj) => {
-    //   this.setState({sightings: initialScrubber(obj)})
+    //    const initialData = initialScrubber(stubbedData)
+    //   this.setState({ initialSightings: initialData,
+    //                   viewing: initialData })
     // })
 
     const thing = initialScrubber(stubbedData)
     console.log('scrubber check:',thing);
-    this.setState({sightings: initialScrubber(stubbedData)})
-
+    const initialData = initialScrubber(stubbedData)
+    this.setState({ initialSightings: initialData,
+                    viewing: initialData })
   }
 
   handleInfoBox(uniquePin) {
     // receive id that is associated with the clicked pin
-    const sightings = this.state.sightings
+    const sightings = this.state.viewing
 
     //map through state.sightings.keys to find the matching id
       //using the key toggle this objects info key from false to true
-    const newState = Object.keys(this.state.sightings).reduce((obj, key) => {
+    const newState = Object.keys(this.state.viewing).reduce((obj, key) => {
       if(key === uniquePin && sightings[key].info === 'false') {
       sightings[key].info = 'true'
     } else if ( key === uniquePin && sightings[key].info === 'true' ) {
@@ -51,23 +56,21 @@ class Root extends Component {
     }, {})
 
     //set state to result from above
-    this.setState({
-      sightings: newState
-    })
+    this.setState({ viewing: newState })
   }
 
-  //NOTE: '/api/near?lat=393&long=493' <-- to transfer data to BE request
+
   handleNearSearch(lat, lng) {
     fetch(`/api/near?lat=${lat}&lng=${lng}`, {
       method: 'GET'
     })
     .then((res) => res.json())
     .then((obj) => {
-      this.setState({ sightings: nearScrubber(obj)})
+      const scrubbedNear = nearScrubber(obj)
+      this.setState({ nearSightings: scrubbedNear,
+                      viewing: scrubbedNear })
     })
   }
-
-
 
 
   render() {
@@ -80,7 +83,7 @@ class Root extends Component {
         <MapContainer
           mapElement={ <div className='mapelement' /> }
           containerElement={ <div className='containerElement'/> }
-          sightings={this.state.sightings}
+          sightings={this.state.viewing}
           clickInfoBox={this.handleInfoBox.bind(this)}
         />
       </div>
