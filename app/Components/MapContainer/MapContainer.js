@@ -3,12 +3,13 @@ import React from 'react'
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 
-const MapContainer = withGoogleMap(({ sightings }) => {
+const MapContainer = withGoogleMap(({ sightings, openInfoBox }) => {
 
     const pinsArray = Object.keys(sightings).map((claim, i) => {
       return <Marker
                 key={i}
                 position={{ lat: sightings[claim].latitude , lng: sightings[claim].longitude }}
+                onClick={() => openInfoBox()}
               />
     })
 

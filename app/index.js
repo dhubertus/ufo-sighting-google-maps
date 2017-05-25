@@ -8,12 +8,19 @@ import { initialScrubber } from './helpers/initialScrubber.js'
 import stubbedData from './helpers/stubbedApiCall.js'
 
 class Root extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state={
       sightings: {}
     }
   }
+
+
+  handleInfoBox() {
+    console.log('clicked')
+  }
+
+
   componentWillMount() {
     // NOTE: INSERT API CALL TO YOUR INTERNAL API
 
@@ -39,6 +46,7 @@ class Root extends Component {
           mapElement={ <div className='mapelement' /> }
           containerElement={ <div className='containerElement'/> }
           sightings={this.state.sightings}
+          openInfoBox={this.handleInfoBox.bind(this)}
         />
       </div>
     )
