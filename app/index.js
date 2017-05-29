@@ -14,7 +14,8 @@ class Root extends Component {
     this.state = {
       nearSightings: {},
       initialSightings: {},
-      viewing: {}
+      viewing: {},
+      loading: true
     }
   }
 
@@ -26,16 +27,22 @@ class Root extends Component {
     // })
     // .then(resp => resp.json())
     // .then((obj) => {
-    //    const initialData = initialScrubber(stubbedData)
+    //    const initialData = initialScrubber(obj)
+    //    console.log(initialData)
     //   this.setState({ initialSightings: initialData,
-    //                   viewing: initialData })
+    //                   viewing: initialData,
+    //                   loading: false})
     // })
 
     const thing = initialScrubber(stubbedData)
     console.log('scrubber check:',thing);
     const initialData = initialScrubber(stubbedData)
-    this.setState({ initialSightings: initialData,
-                    viewing: initialData })
+    setTimeout(() => {
+      this.setState({ initialSightings: initialData,
+                      viewing: initialData,
+                      loading: false })
+      // console.log(this)
+    }, 2000)
   }
 
   handleInfoBox(uniquePin) {
@@ -59,26 +66,57 @@ class Root extends Component {
     this.setState({ viewing: newState })
   }
 
+  handleDecadeClick(lower, upper) {
+    this.setState({ loading: true })
+    fetch(`/api/range?lower=${lower}&upper=${upper}`, {
+      method: 'GET'
+    })
+    .then((res) => res.json())
+    .then((obj) => {
+      const scrubbedRange = initialScrubber(obj)
+      setTimeout(() => {
+        this.setState({ nearSightings: scrubbedRange,
+                        viewing: scrubbedRange,
+                        loading: false })
+      }, 1000)
+    })
+  }
+
 
   handleNearSearch(lat, lng) {
+
+    this.setState({ loading: true })
     fetch(`/api/near?lat=${lat}&lng=${lng}`, {
       method: 'GET'
     })
     .then((res) => res.json())
     .then((obj) => {
       const scrubbedNear = nearScrubber(obj)
-      this.setState({ nearSightings: scrubbedNear,
-                      viewing: scrubbedNear })
+      setTimeout(() => {
+        this.setState({ nearSightings: scrubbedNear,
+                        viewing: scrubbedNear,
+                        loading: false })
+      }, 1000)
     })
   }
 
 
   render() {
+    if(this.state.loading) {
+      return (
+        <div>
+          <img src='./assets/styles/images/ETlight.gif'/>
+          <p>...Loading</p>
+        </div>
+      )
+    }
+
     return (
       <div id='app-container'>
         <HeaderContainer />
         <AsideContainer
           searchInput={this.handleNearSearch.bind(this)}
+          decadeClick={this.handleDecadeClick.bind(this)}
         />
         <MapContainer
           mapElement={ <div className='mapelement' /> }

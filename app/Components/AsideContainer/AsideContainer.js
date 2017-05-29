@@ -23,8 +23,20 @@ export default class AsideContainer extends Component {
       this.props.searchInput(lat, lng)
       this.setState({ userInput: '' })
     })
+  }
 
-    // this.props.searchInput()
+  returnDecadeParams(e) {
+    const bottomParam = parseInt(e.target.innerHTML.slice(0,4))
+
+    let upperParam;
+
+    if (bottomParam === 2000) {
+      upperParam = bottomParam + 16
+    } else {
+      upperParam = bottomParam + 9
+    }
+
+    this.props.decadeClick(bottomParam, upperParam)
   }
 
   render() {
@@ -33,6 +45,12 @@ export default class AsideContainer extends Component {
         <h1>SearchBar</h1>
         <input type='text' value={this.state.userInput} placeholder='Enter City and State' onChange={(e) => this.handleUserInput(e)}/>
         <button onClick={() => this.returnSearchCoordinates(this.state.userInput)}>Search</button>
+        <button onClick={(e) => this.returnDecadeParams(e)}>2000's</button>
+        <button onClick={(e) => this.returnDecadeParams(e)}>1990's</button>
+        <button onClick={(e) => this.returnDecadeParams(e)}>1980's</button>
+        <button onClick={(e) => this.returnDecadeParams(e)}>1970's</button>
+        <button onClick={(e) => this.returnDecadeParams(e)}>1960's</button>
+        <button onClick={(e) => this.returnDecadeParams(e)}>1950's</button>
       </div>
     )
   }

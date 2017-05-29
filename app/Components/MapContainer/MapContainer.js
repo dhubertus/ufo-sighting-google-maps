@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, InfoWindow, MarkerClusterer } from 'react-google-maps'
 
 
 const MapContainer = withGoogleMap(({ sightings, clickInfoBox }) => {
