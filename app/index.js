@@ -11,8 +11,11 @@ import stubbedData from './helpers/stubbedApiCall.js'
 class Root extends Component {
   constructor(props) {
     super(props)
-    this.state={
-      sightings: {}
+    this.state = {
+      nearSightings: {},
+      initialSightings: {},
+      viewing: {},
+      loading: true
     }
   }
 
@@ -24,22 +27,31 @@ class Root extends Component {
     // })
     // .then(resp => resp.json())
     // .then((obj) => {
-    //   this.setState({sightings: initialScrubber(obj)})
+    //    const initialData = initialScrubber(obj)
+    //    console.log(initialData)
+    //   this.setState({ initialSightings: initialData,
+    //                   viewing: initialData,
+    //                   loading: false})
     // })
 
     const thing = initialScrubber(stubbedData)
     console.log('scrubber check:',thing);
-    this.setState({sightings: initialScrubber(stubbedData)})
-
+    const initialData = initialScrubber(stubbedData)
+    setTimeout(() => {
+      this.setState({ initialSightings: initialData,
+                      viewing: initialData,
+                      loading: false })
+      // console.log(this)
+    }, 2000)
   }
 
   handleInfoBox(uniquePin) {
     // receive id that is associated with the clicked pin
-    const sightings = this.state.sightings
+    const sightings = this.state.viewing
 
     //map through state.sightings.keys to find the matching id
       //using the key toggle this objects info key from false to true
-    const newState = Object.keys(this.state.sightings).reduce((obj, key) => {
+    const newState = Object.keys(this.state.viewing).reduce((obj, key) => {
       if(key === uniquePin && sightings[key].info === 'false') {
       sightings[key].info = 'true'
     } else if ( key === uniquePin && sightings[key].info === 'true' ) {
@@ -51,36 +63,65 @@ class Root extends Component {
     }, {})
 
     //set state to result from above
-    this.setState({
-      sightings: newState
+    this.setState({ viewing: newState })
+  }
+
+  handleDecadeClick(lower, upper) {
+    this.setState({ loading: true })
+    fetch(`/api/range?lower=${lower}&upper=${upper}`, {
+      method: 'GET'
+    })
+    .then((res) => res.json())
+    .then((obj) => {
+      const scrubbedRange = initialScrubber(obj)
+      setTimeout(() => {
+        this.setState({ nearSightings: scrubbedRange,
+                        viewing: scrubbedRange,
+                        loading: false })
+      }, 1000)
     })
   }
 
-  //NOTE: '/api/near?lat=393&long=493' <-- to transfer data to BE request
+
   handleNearSearch(lat, lng) {
+
+    this.setState({ loading: true })
     fetch(`/api/near?lat=${lat}&lng=${lng}`, {
       method: 'GET'
     })
     .then((res) => res.json())
     .then((obj) => {
-      this.setState({ sightings: nearScrubber(obj)})
+      const scrubbedNear = nearScrubber(obj)
+      setTimeout(() => {
+        this.setState({ nearSightings: scrubbedNear,
+                        viewing: scrubbedNear,
+                        loading: false })
+      }, 1000)
     })
   }
 
 
-
-
   render() {
+    if(this.state.loading) {
+      return (
+        <div>
+          <img src='./assets/styles/images/ETlight.gif'/>
+          <p>...Loading</p>
+        </div>
+      )
+    }
+
     return (
       <div id='app-container'>
         <HeaderContainer />
         <AsideContainer
           searchInput={this.handleNearSearch.bind(this)}
+          decadeClick={this.handleDecadeClick.bind(this)}
         />
         <MapContainer
           mapElement={ <div className='mapelement' /> }
           containerElement={ <div className='containerElement'/> }
-          sightings={this.state.sightings}
+          sightings={this.state.viewing}
           clickInfoBox={this.handleInfoBox.bind(this)}
         />
       </div>
