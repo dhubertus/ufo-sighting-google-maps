@@ -3,7 +3,7 @@ import React from 'react'
 import { withGoogleMap, GoogleMap, Marker, InfoWindow, MarkerClusterer } from 'react-google-maps'
 
 
-const MapContainer = withGoogleMap(({ sightings, clickInfoBox }) => {
+const MapContainer = withGoogleMap(({ sightings, clickInfoBox, loading }) => {
     const pinsArray = Object.keys(sightings).map((claim, i) => {
       return  <Marker
                 key={i}
@@ -16,11 +16,16 @@ const MapContainer = withGoogleMap(({ sightings, clickInfoBox }) => {
                     <div>
                       <div>{sightings[claim].summary}</div>
                       <a href={sightings[claim].url} target='_blank'>{'Read More'}</a>
-                  </div>
+                      <button>Fav</button>
+                    </div>
                   </InfoWindow>
                 )}
               </Marker>
     })
+
+
+
+
 
   return (
     <div id='map-container'>
