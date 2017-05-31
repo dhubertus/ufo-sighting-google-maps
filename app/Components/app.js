@@ -16,7 +16,8 @@ import stubbedData from '../helpers/stubbedApiCall.js'
       nearSightings: {},
       initialSightings: {},
       viewing: {},
-      loading: true
+      loading: true,
+      favorites: {}
     }
   }
 
@@ -67,6 +68,17 @@ import stubbedData from '../helpers/stubbedApiCall.js'
     this.setState({ viewing: newState })
   }
 
+  handleFavorite(favKey) {
+    console.log('hooked');
+    // console.log(newFavorite);
+    const newState = Object.assign({}, this.state.favorites, {[favKey]: this.state.viewing[favKey]} )
+
+    this.setState({
+      favorites: newState
+    })
+
+  }
+
   handleDecadeClick(lower, upper) {
     this.setState({ loading: true })
     fetch(`/api/range?lower=${lower}&upper=${upper}`, {
@@ -108,7 +120,7 @@ import stubbedData from '../helpers/stubbedApiCall.js'
       return (
         <div id='map-container'>
           <img src='../assets/styles/images/ETlight.gif'/>
-          <p>...Loading</p>
+          <p>Loading<img src='../assets/styles/images/loading_dots.gif'/></p>
         </div>
       )
     }
@@ -128,6 +140,7 @@ import stubbedData from '../helpers/stubbedApiCall.js'
             sightings={this.state.viewing}
             clickInfoBox={this.handleInfoBox.bind(this)}
             loading={this.state.loading}
+            favorite={this.handleFavorite.bind(this)}
           />
         </div>
 
