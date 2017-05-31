@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { withGoogleMap, GoogleMap, Marker, InfoWindow, MarkerClusterer } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 
 
 const MapContainer = withGoogleMap(({ sightings, clickInfoBox, loading }) => {
@@ -29,12 +29,12 @@ const MapContainer = withGoogleMap(({ sightings, clickInfoBox, loading }) => {
 
   return (
     <div id='map-container'>
-    <GoogleMap
-      defaultZoom={4}
-      defaultCenter={{ lat:39.8282 , lng: -98.5795 }}>
-      {pinsArray}
-    </GoogleMap>
-  </div>
+      <GoogleMap
+        defaultZoom={4}
+        defaultCenter={{ lat:39.8282 , lng: -98.5795 }}>
+        {pinsArray}
+      </GoogleMap>
+    </div>
   )
 })
 
