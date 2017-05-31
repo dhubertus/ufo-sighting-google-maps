@@ -1,0 +1,62 @@
+export default
+{
+   "error":false,
+   "apiversion":"2.0.0",
+   "year":1950,
+   "month":12,
+   "day":1,
+   "dayofweek":"Friday",
+   "datechanged":false,
+   "lon":12.48,
+   "lat":41.89,
+   "tz":1,
+   "sundata":[
+      {
+         "phen":"BC",
+         "time":"06:47"
+      },
+      {
+         "phen":"R",
+         "time":"07:18"
+      },
+      {
+         "phen":"U",
+         "time":"11:59"
+      },
+      {
+         "phen":"S",
+         "time":"16:40"
+      },
+      {
+         "phen":"EC",
+         "time":"17:11"
+      }
+   ],
+   "moondata":[
+      {
+         "phen":"U",
+         "time":"05:08"
+      },
+      {
+         "phen":"S",
+         "time":"12:20"
+      },
+      {
+         "phen":"R",
+         "time":"22:52"
+      }
+   ],
+   "prevmoondata":[
+      {
+         "phen":"R",
+         "time":"21:44"
+      }
+   ],
+   "closestphase":{
+      "phase":"Last Quarter",
+      "date":"December 2, 1950",
+      "time":"17:22"
+   },
+   "fracillum":"63%",
+   "curphase":"Waning Gibbous"
+}

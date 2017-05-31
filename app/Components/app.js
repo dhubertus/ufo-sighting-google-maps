@@ -16,7 +16,8 @@ import stubbedData from '../helpers/stubbedApiCall.js'
       nearSightings: {},
       initialSightings: {},
       viewing: {},
-      loading: true
+      loading: true,
+      favorites: {}
     }
   }
 
@@ -67,6 +68,35 @@ import stubbedData from '../helpers/stubbedApiCall.js'
     this.setState({ viewing: newState })
   }
 
+  handleFavorite(favKey) {
+    console.log('hooked');
+    // console.log(newFavorite);
+    const latitude = this.state.viewing[favKey].latitude
+    const longitude = this.state.viewing[favKey].longitude
+    const year = this.state.viewing[favKey].year
+    const month = this.state.viewing[favKey].month
+    const day = this.state.viewing[favKey].day
+    const state = this.state.viewing[favKey].state
+    const city = this.state.viewing[favKey].city
+    let moonPhaseObj;
+    let historicalWeatherObj;
+
+    fetch(`http://api.usno.navy.mil/rstt/oneday?date=${month}/${day}/${year}&coords=${latitude},${longitude}&tz=1`)
+    .then((res) => res.json())
+    .then((obj) => console.log(obj))
+
+    fetch(`http://api.wunderground.com/api/be16da1d1979f7aa/history_${year}${month}${day}/q/${state}/${city}.json`)
+    .then((res) => res.json())
+    .then((obj) => console.log(obj))
+
+    const newState = Object.assign({}, this.state.favorites, {[favKey]: this.state.viewing[favKey]} )
+
+    this.setState({
+      favorites: newState
+    })
+
+  }
+
   handleDecadeClick(lower, upper) {
     this.setState({ loading: true })
     fetch(`/api/range?lower=${lower}&upper=${upper}`, {
@@ -108,7 +138,7 @@ import stubbedData from '../helpers/stubbedApiCall.js'
       return (
         <div id='map-container'>
           <img src='../assets/styles/images/ETlight.gif'/>
-          <p>...Loading</p>
+          <p>Loading<img src='../assets/styles/images/loading_dots.gif'/></p>
         </div>
       )
     }
@@ -128,6 +158,7 @@ import stubbedData from '../helpers/stubbedApiCall.js'
             sightings={this.state.viewing}
             clickInfoBox={this.handleInfoBox.bind(this)}
             loading={this.state.loading}
+            favorite={this.handleFavorite.bind(this)}
           />
         </div>
 
