@@ -11,6 +11,7 @@ export const initialScrubber = (api) => {
       acc[obj._id].state = obj.state
       acc[obj._id].year = obj.date.slice(0,4)
       acc[obj._id].month = obj.date.slice(5,7)
+      acc[obj._id].day = obj.date.slice(8,10)
       acc[obj._id].shape = obj.shape
       acc[obj._id].summary = obj.summary
       acc[obj._id].url = obj.url

@@ -11,6 +11,7 @@ export const nearScrubber = (api) => {
       acc[item.obj._id].state = item.obj.state
       acc[item.obj._id].year = item.obj.date.slice(0,4)
       acc[item.obj._id].month = item.obj.date.slice(5,7)
+      acc[item.obj._id].day = item.obj.date.slice(8,10)
       acc[item.obj._id].shape = item.obj.shape
       acc[item.obj._id].summary = item.obj.summary
       acc[item.obj._id].url = item.obj.url
