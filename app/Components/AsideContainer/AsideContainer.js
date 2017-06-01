@@ -11,7 +11,7 @@ export default class AsideContainer extends Component {
   handleUserInput(e) {
     this.setState({ userInput: e.target.value })
   }
-////https://maps.googleapis.com/maps/api/geocode/json?address=patterson%20ny&key=AIzaSyDMTYgcP9OWXVhOAHRow8CEhZ-FyUKtO4Y
+
   returnSearchCoordinates(search) {
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${search}&key=AIzaSyDMTYgcP9OWXVhOAHRow8CEhZ-FyUKtO4Y`, {
       method: 'GET'
@@ -45,6 +45,7 @@ export default class AsideContainer extends Component {
         <h1>SearchBar</h1>
         <input type='text' value={this.state.userInput} placeholder='Enter City and State' onChange={(e) => this.handleUserInput(e)}/>
         <button onClick={() => this.returnSearchCoordinates(this.state.userInput)}>Search</button>
+        <button onClick={() => this.props.randomClick()}>Random</button>
         <button onClick={(e) => this.returnDecadeParams(e)}>2000's</button>
         <button onClick={(e) => this.returnDecadeParams(e)}>1990's</button>
         <button onClick={(e) => this.returnDecadeParams(e)}>1980's</button>
