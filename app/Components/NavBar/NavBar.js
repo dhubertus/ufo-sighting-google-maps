@@ -7,6 +7,9 @@ export const NavBar = (props) => {
     <div>
       <NavLink
         activeClassName='selected'
+        to='/'>Home</NavLink>
+      <NavLink
+        activeClassName='selected'
         to='/favorites'>Favorites</NavLink>
     </div>
   )

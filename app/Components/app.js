@@ -8,6 +8,9 @@ import { HeaderContainer } from './HeaderContainer/HeaderContainer'
 import { initialScrubber } from '../helpers/initialScrubber.js'
 import { nearScrubber } from '../helpers/nearScrubber.js'
 import stubbedData from '../helpers/stubbedApiCall.js'
+import { moonScrubber } from '../helpers/moonScrubber.js'
+import { weatherScrubber } from '../helpers/weatherScrubber.js'
+import { CardContainer } from './CardContainer/CardContainer'
 
  export default class Root extends Component {
   constructor(props) {
@@ -23,28 +26,33 @@ import stubbedData from '../helpers/stubbedApiCall.js'
 
   componentWillMount() {
     // NOTE: INSERT API CALL TO YOUR INTERNAL API
-
-    // fetch( '/api/places', {
+    // const randomNumber = Math.round(Math.random()*90000)
+    //
+    // console.log(randomNumber)
+    //
+    // fetch( `/api/places?randomNumber=${randomNumber}`, {
     //   method: 'GET'
     // })
     // .then(resp => resp.json())
     // .then((obj) => {
+    //   console.log(obj)
     //    const initialData = initialScrubber(obj)
-    //    console.log(initialData)
+    //
     //   this.setState({ initialSightings: initialData,
     //                   viewing: initialData,
-    //                   loading: false})
+    //                   loading: false })
     // })
+    this.handleRandomClick()
 
-    const thing = initialScrubber(stubbedData)
-    console.log('scrubber check:',thing);
-    const initialData = initialScrubber(stubbedData)
-    setTimeout(() => {
-      this.setState({ initialSightings: initialData,
-                      viewing: initialData,
-                      loading: false })
-      // console.log(this)
-    }, 2000)
+    // const thing = initialScrubber(stubbedData)
+    // console.log('scrubber check:',thing);
+    // const initialData = initialScrubber(stubbedData)
+    // setTimeout(() => {
+    //   this.setState({ initialSightings: initialData,
+    //                   viewing: initialData,
+    //                   loading: false })
+    //   // console.log(this)
+    // }, 2000)
   }
 
   handleInfoBox(uniquePin) {
@@ -69,8 +77,6 @@ import stubbedData from '../helpers/stubbedApiCall.js'
   }
 
   handleFavorite(favKey) {
-    console.log('hooked');
-    // console.log(newFavorite);
     const latitude = this.state.viewing[favKey].latitude
     const longitude = this.state.viewing[favKey].longitude
     const year = this.state.viewing[favKey].year
@@ -81,25 +87,35 @@ import stubbedData from '../helpers/stubbedApiCall.js'
     let moonPhaseObj;
     let historicalWeatherObj;
 
+
+
     fetch(`http://api.usno.navy.mil/rstt/oneday?date=${month}/${day}/${year}&coords=${latitude},${longitude}&tz=1`)
     .then((res) => res.json())
-    .then((obj) => console.log(obj))
+    .then((obj) => {
+      moonPhaseObj = moonScrubber(obj)
+      console.log('moon', moonPhaseObj)
+    })
+
 
     fetch(`http://api.wunderground.com/api/be16da1d1979f7aa/history_${year}${month}${day}/q/${state}/${city}.json`)
     .then((res) => res.json())
-    .then((obj) => console.log(obj))
+    .then((obj) => {
+      historicalWeatherObj = weatherScrubber(obj)
+      console.log('hist', historicalWeatherObj)
+      const newKeysObj = Object.assign(this.state.viewing[favKey], moonPhaseObj, historicalWeatherObj)
+      const newState = Object.assign({}, this.state.favorites, {[favKey]: newKeysObj})
 
-    const newState = Object.assign({}, this.state.favorites, {[favKey]: this.state.viewing[favKey]} )
-
-    this.setState({
-      favorites: newState
+      this.setState({
+        favorites: newState
+      })
     })
-
   }
 
   handleDecadeClick(lower, upper) {
+    const randomNumber = Math.round(Math.random()*350)
+
     this.setState({ loading: true })
-    fetch(`/api/range?lower=${lower}&upper=${upper}`, {
+    fetch(`/api/range?lower=${lower}&upper=${upper}&randomNumber=${randomNumber}`, {
       method: 'GET'
     })
     .then((res) => res.json())
@@ -131,6 +147,22 @@ import stubbedData from '../helpers/stubbedApiCall.js'
     })
   }
 
+  handleRandomClick() {
+    const randomNumber = Math.round(Math.random()*90000)
+
+    fetch( `/api/places?randomNumber=${randomNumber}`, {
+      method: 'GET'
+    })
+    .then(resp => resp.json())
+    .then((obj) => {
+      const initialData = initialScrubber(obj)
+
+      this.setState({ initialSightings: initialData,
+                      viewing: initialData,
+                      loading: false })
+    })
+  }
+
 
   render() {
 
@@ -145,24 +177,31 @@ import stubbedData from '../helpers/stubbedApiCall.js'
 
     return (
       <div id='app-container'>
+
         <HeaderContainer />
+
         <Route exact path='/' render={({history}) => (
           <div id='aside-map-container'>
-          <AsideContainer
-            searchInput={this.handleNearSearch.bind(this)}
-            decadeClick={this.handleDecadeClick.bind(this)}
-          />
-          <MapContainer
-            mapElement={ <div className='mapelement' /> }
-            containerElement={ <div className='containerElement'/> }
-            sightings={this.state.viewing}
-            clickInfoBox={this.handleInfoBox.bind(this)}
-            loading={this.state.loading}
-            favorite={this.handleFavorite.bind(this)}
-          />
-        </div>
-
+            <AsideContainer
+              searchInput={this.handleNearSearch.bind(this)}
+              decadeClick={this.handleDecadeClick.bind(this)}
+              randomClick={this.handleRandomClick.bind(this)}
+            />
+            <MapContainer
+              mapElement={ <div className='mapelement' /> }
+              containerElement={ <div className='containerElement'/> }
+              sightings={this.state.viewing}
+              clickInfoBox={this.handleInfoBox.bind(this)}
+              loading={this.state.loading}
+              favorite={this.handleFavorite.bind(this)}
+            />
+          </div>
         )}/>
+
+        <Route exact path='/favorites' render={({history}) => (
+          <CardContainer favorites={this.state.favorites} />
+        )}/>
+
       </div>
     )
   }
