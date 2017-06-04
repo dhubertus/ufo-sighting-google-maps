@@ -93,7 +93,6 @@ import { CardContainer } from './CardContainer/CardContainer'
     .then((res) => res.json())
     .then((obj) => {
       moonPhaseObj = moonScrubber(obj)
-      console.log('moon', moonPhaseObj)
     })
 
 
@@ -101,13 +100,22 @@ import { CardContainer } from './CardContainer/CardContainer'
     .then((res) => res.json())
     .then((obj) => {
       historicalWeatherObj = weatherScrubber(obj)
-      console.log('hist', historicalWeatherObj)
       const newKeysObj = Object.assign(this.state.viewing[favKey], moonPhaseObj, historicalWeatherObj)
       const newState = Object.assign({}, this.state.favorites, {[favKey]: newKeysObj})
 
       this.setState({
         favorites: newState
       })
+    })
+  }
+
+  handleDelete(id) {
+    console.log(id)
+    // const curState = Object.assign({}, this.state.favorites)
+    delete this.state.favorites[id]
+    // console.log(newState);
+    this.setState({
+      favorites: this.state.favorites
     })
   }
 
@@ -150,6 +158,10 @@ import { CardContainer } from './CardContainer/CardContainer'
   handleRandomClick() {
     const randomNumber = Math.round(Math.random()*90000)
 
+    this.setState({
+      loading: true
+    })
+
     fetch( `/api/places?randomNumber=${randomNumber}`, {
       method: 'GET'
     })
@@ -157,9 +169,15 @@ import { CardContainer } from './CardContainer/CardContainer'
     .then((obj) => {
       const initialData = initialScrubber(obj)
 
-      this.setState({ initialSightings: initialData,
-                      viewing: initialData,
-                      loading: false })
+      // this.setState({ initialSightings: initialData,
+      //                 viewing: initialData,
+      //                 loading: false })
+
+      setTimeout(() => {
+        this.setState({ initialSightings: initialData,
+                        viewing: initialData,
+                        loading: false })
+      }, 1000)
     })
   }
 
@@ -167,10 +185,15 @@ import { CardContainer } from './CardContainer/CardContainer'
   render() {
 
     if(this.state.loading) {
+
+      const randomNumber = Math.ceil(Math.random()*14)
       return (
-        <div id='map-container'>
-          <img src='../assets/styles/images/ETlight.gif'/>
-          <p>Loading<img src='../assets/styles/images/loading_dots.gif'/></p>
+        <div id='loading-container'>
+          <img src={`../assets/styles/images/${randomNumber}.gif`}/>
+          <div id='loading'>
+            <p>Loading</p>
+            <img src='../assets/styles/images/loading_dots.gif'/>
+          </div>
         </div>
       )
     }
@@ -178,7 +201,9 @@ import { CardContainer } from './CardContainer/CardContainer'
     return (
       <div id='app-container'>
 
-        <HeaderContainer />
+        <HeaderContainer
+          favorites={this.state.favorites}
+        />
 
         <Route exact path='/' render={({history}) => (
           <div id='aside-map-container'>
@@ -199,7 +224,10 @@ import { CardContainer } from './CardContainer/CardContainer'
         )}/>
 
         <Route exact path='/favorites' render={({history}) => (
-          <CardContainer favorites={this.state.favorites} />
+          <CardContainer
+            favorites={this.state.favorites}
+            deleteFav={this.handleDelete.bind(this)}
+          />
         )}/>
 
       </div>
