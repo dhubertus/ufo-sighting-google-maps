@@ -13,10 +13,12 @@ const MapContainer = withGoogleMap(({ sightings, clickInfoBox, loading, favorite
               >
                 {sightings[claim].info === 'true' && (
                   <InfoWindow onCloseClick={()=> clickInfoBox(claim)}>
-                    <div>
+                    <div className='window-div'>
                       <div>{sightings[claim].summary}</div>
-                      <a href={sightings[claim].url} target='_blank'>Read More</a>
-                      <button onClick={() => favorite(claim)}>Fav</button>
+                      <div className='window-btns'>
+                        <a className='read-more' href={sightings[claim].url} target='_blank'>Read More</a>
+                        <button className='favorite-btn' onClick={() => favorite(claim)}>Favorite</button>
+                      </div>
                     </div>
                   </InfoWindow>
                 )}

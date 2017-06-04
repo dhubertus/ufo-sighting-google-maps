@@ -42,16 +42,19 @@ export default class AsideContainer extends Component {
   render() {
     return (
       <div id='aside-container'>
-        <h1>SearchBar</h1>
-        <input type='text' value={this.state.userInput} placeholder='Enter City and State' onChange={(e) => this.handleUserInput(e)}/>
-        <button onClick={() => this.returnSearchCoordinates(this.state.userInput)}>Search</button>
-        <button onClick={() => this.props.randomClick()}>Random</button>
-        <button onClick={(e) => this.returnDecadeParams(e)}>2000's</button>
-        <button onClick={(e) => this.returnDecadeParams(e)}>1990's</button>
-        <button onClick={(e) => this.returnDecadeParams(e)}>1980's</button>
-        <button onClick={(e) => this.returnDecadeParams(e)}>1970's</button>
-        <button onClick={(e) => this.returnDecadeParams(e)}>1960's</button>
-        <button onClick={(e) => this.returnDecadeParams(e)}>1950's</button>
+        <div id='search'>
+          <h4>Search By Area:</h4>
+          <input className='aside-input' type='text' value={this.state.userInput} placeholder='Enter City and State' onChange={(e) => this.handleUserInput(e)}/>
+          <button className='aside-btn' onClick={() => this.returnSearchCoordinates(this.state.userInput)}>Search</button>
+        </div>
+        <h4 id='decade'>Search By Decade:</h4>
+        <button className='aside-btn' onClick={() => this.props.randomClick()}>Random</button>
+        <button className='aside-btn' onClick={(e) => this.returnDecadeParams(e)}>2000's</button>
+        <button className='aside-btn' onClick={(e) => this.returnDecadeParams(e)}>1990's</button>
+        <button className='aside-btn' onClick={(e) => this.returnDecadeParams(e)}>1980's</button>
+        <button className='aside-btn' onClick={(e) => this.returnDecadeParams(e)}>1970's</button>
+        <button className='aside-btn' onClick={(e) => this.returnDecadeParams(e)}>1960's</button>
+        <button className='aside-btn' onClick={(e) => this.returnDecadeParams(e)}>1950's</button>
       </div>
     )
   }

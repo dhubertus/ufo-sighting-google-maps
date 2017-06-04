@@ -1,13 +1,13 @@
 import React from 'react'
 
 
-export const Card = ({ city, state, summary, month, day, year, shape, url, moonPhase, visibility, precipitation, humidity, temperature, inHg }) => {
+export const Card = ({ id, city, state, summary, month, day, year, shape, url, moonPhase, visibility, precipitation, humidity, temperature, inHg, deleteFav }) => {
 
   return(
     <div className='individual-card' >
       <h5>{ month + '/' + day + '/' + year }</h5>
       <h3>{ city + ', ' + state}</h3>
-      <p><span>Summary:</span> { ' ' + summary }</p>
+      <p><span className='summary'>Summary:</span> { ' ' + summary }</p>
       <a href={url} target='_blank'>Read More</a>
       <table>
         <tr>
@@ -26,9 +26,10 @@ export const Card = ({ city, state, summary, month, day, year, shape, url, moonP
           <td>{ precipitation + ' in'}</td>
           <td>{ visibility + ' miles' }</td>
           <td>{ Math.round(inHg*25.4) + ' mmHg' }</td>
-          <td>{ moonPhase }</td>
+          <td>{ moonPhase || 'NA' }</td>
         </tr>
       </table>
+      <button className='delete-btn' onClick={() => deleteFav(id)}>Delete</button>
     </div>
   )
 }
