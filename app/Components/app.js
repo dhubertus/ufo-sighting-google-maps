@@ -156,6 +156,7 @@ import { CardContainer } from './CardContainer/CardContainer'
   }
 
   handleRandomClick() {
+
     const randomNumber = Math.round(Math.random()*90000)
 
     this.setState({
@@ -168,17 +169,15 @@ import { CardContainer } from './CardContainer/CardContainer'
     .then(resp => resp.json())
     .then((obj) => {
       const initialData = initialScrubber(obj)
-
-      // this.setState({ initialSightings: initialData,
-      //                 viewing: initialData,
-      //                 loading: false })
-
       setTimeout(() => {
         this.setState({ initialSightings: initialData,
                         viewing: initialData,
                         loading: false })
       }, 1000)
     })
+    .catch(this.setState({
+      viewing: 'Error'
+    }))
   }
 
 

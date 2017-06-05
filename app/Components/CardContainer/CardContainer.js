@@ -3,7 +3,6 @@ import { Card } from '../Card/Card'
 
 export const CardContainer = (props) => {
 
-  console.log(props);
   if(Object.keys(props.favorites).length) {
 
 
