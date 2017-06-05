@@ -178,11 +178,11 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 350px;
+  height: 400px;
   width: 70%;
   align-self: center;
   margin: 10px;
-  padding-bottom: 25px;
+  padding-bottom: 0 25px 25px 25px;
   border: 2px solid;
   border-radius: 20px;
   background: url('./images/card-background.jpg');
@@ -217,6 +217,8 @@ button {
   background: #6f5a80;
   color: #c0d4bc;
   border-radius: 10px;
+  text-decoration: none;
+  font-weight: 400;
 }
 
 .individual-card a:hover {
@@ -247,6 +249,24 @@ td {
   font-size: 1.6em;
 }
 
+.card-btn-container {
+  display:flex;
+  height:25px;
+  margin:20px;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.card-btn-container button {
+  background: #6f5a80;
+  color: #c0d4bc;
+  border-radius: 10px;
+  font-size: 100%;
+  height: 38px;
+  width: 100px;
+}
+
 /*NOTE: Loading CSS*/
 
 #loading-container {
@@ -272,6 +292,8 @@ td {
 #loading img {
   height: 150px;
 }
+
+
 
 @media screen and (max-width: 800px) {
   body {

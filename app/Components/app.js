@@ -25,7 +25,29 @@ import { CardContainer } from './CardContainer/CardContainer'
   }
 
   componentWillMount() {
+
     this.handleRandomClick()
+  }
+
+  handleSameDay(year, month, day, history) {
+    const nextDay = (parseInt(day) + 1).toString()
+    console.log(year, month, day, nextDay);
+    this.setState({
+      loading: true
+    })
+    fetch(`/api/sameDay?year=${year}&month=${month}&day=${day}&nextDay=${nextDay}`)
+    .then((res) => res.json())
+    .then((obj) => {
+      const sameDay = initialScrubber(obj)
+
+      setTimeout(() => {
+        this.setState({
+          viewing: sameDay,
+          loading: false
+        })
+        history.replace('/')
+      }, 1000)
+    })
   }
 
   handleInfoBox(uniquePin) {
@@ -78,6 +100,7 @@ import { CardContainer } from './CardContainer/CardContainer'
   }
 
   handleDelete(id) {
+
     delete this.state.favorites[id]
 
     this.setState({
@@ -135,6 +158,7 @@ import { CardContainer } from './CardContainer/CardContainer'
     .then(resp => resp.json())
     .then((obj) => {
       const initialData = initialScrubber(obj)
+      // console.log(this.props.history);
       setTimeout(() => {
         this.setState({ initialSightings: initialData,
                         viewing: initialData,
@@ -192,6 +216,8 @@ import { CardContainer } from './CardContainer/CardContainer'
           <CardContainer
             favorites={this.state.favorites}
             deleteFav={this.handleDelete.bind(this)}
+            sameDay={this.handleSameDay.bind(this)}
+            history={history}
           />
         )}/>
 
