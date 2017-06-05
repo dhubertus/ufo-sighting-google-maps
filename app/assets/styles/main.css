@@ -272,3 +272,19 @@ td {
 #loading img {
   height: 150px;
 }
+
+@media screen and (max-width: 800px) {
+  body {
+    color: red;
+  }
+
+  #aside-map-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #aside-container {
+    flex-direction: row;
+    width: 90%;
+  }
+}

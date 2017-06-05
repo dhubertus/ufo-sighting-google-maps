@@ -13,7 +13,7 @@ describe('Root', () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve()
-      },3000)
+      },10000)
     })
   }
 
@@ -44,7 +44,7 @@ describe('Root', () => {
 
     expect(loadingContainerImg).toEqual('img')
 
-    const loadingAnimation = wrapper.find('#loading').props()
+    const loadingAnimation = wrapper.find('#loading').props().children
     expect(loadingAnimation.length).toEqual(2)
   })
 
@@ -58,20 +58,24 @@ describe('Root', () => {
     expect(wrapper.state('viewing')).toEqual('Error')
   })
 
-  xit('should set objects in state if it retrieves the initial sightings', async () => {
+  it('should set objects in state if it retrieves the initial sightings', async () => {
     const body = initialScrubber(stubbedApiCall)
-    fetchMock.get('begin:/api/places?randomNumber=' , {
-        status: 200,
-        body: body
-      })
+    // fetchMock.get('begin:/api/places?randomNumber=' , {
+    //     status: 200,
+    //     body: body
+    //   })
 
     // fetchMock.get('*', {status: 200})
     const wrapper = mount(<Root />)
 
     await waitingFunc()
 
+    console.log(wrapper.state())
 
-    expect(wrapper.state('viewing')).toEqual({})
+    const viewingLength = Object.keys(wrapper.state('viewing')).length
+
+
+    expect(viewingLength).toEqual(10)
   })
 
   xit('should be able to add a sighting to favorites', async () => {
