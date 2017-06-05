@@ -25,54 +25,22 @@ import { CardContainer } from './CardContainer/CardContainer'
   }
 
   componentWillMount() {
-    // NOTE: INSERT API CALL TO YOUR INTERNAL API
-    // const randomNumber = Math.round(Math.random()*90000)
-    //
-    // console.log(randomNumber)
-    //
-    // fetch( `/api/places?randomNumber=${randomNumber}`, {
-    //   method: 'GET'
-    // })
-    // .then(resp => resp.json())
-    // .then((obj) => {
-    //   console.log(obj)
-    //    const initialData = initialScrubber(obj)
-    //
-    //   this.setState({ initialSightings: initialData,
-    //                   viewing: initialData,
-    //                   loading: false })
-    // })
     this.handleRandomClick()
-
-    // const thing = initialScrubber(stubbedData)
-    // console.log('scrubber check:',thing);
-    // const initialData = initialScrubber(stubbedData)
-    // setTimeout(() => {
-    //   this.setState({ initialSightings: initialData,
-    //                   viewing: initialData,
-    //                   loading: false })
-    //   // console.log(this)
-    // }, 2000)
   }
 
   handleInfoBox(uniquePin) {
-    // receive id that is associated with the clicked pin
     const sightings = this.state.viewing
 
-    //map through state.sightings.keys to find the matching id
-      //using the key toggle this objects info key from false to true
     const newState = Object.keys(this.state.viewing).reduce((obj, key) => {
       if(key === uniquePin && sightings[key].info === 'false') {
       sightings[key].info = 'true'
     } else if ( key === uniquePin && sightings[key].info === 'true' ) {
       sightings[key].info = 'false'
     }
-    //return all other non matched as they were (info key still false)
       Object.assign(obj, {[key] : sightings[key]})
       return obj
     }, {})
 
-    //set state to result from above
     this.setState({ viewing: newState })
   }
 
@@ -110,10 +78,8 @@ import { CardContainer } from './CardContainer/CardContainer'
   }
 
   handleDelete(id) {
-    console.log(id)
-    // const curState = Object.assign({}, this.state.favorites)
     delete this.state.favorites[id]
-    // console.log(newState);
+
     this.setState({
       favorites: this.state.favorites
     })
@@ -233,5 +199,3 @@ import { CardContainer } from './CardContainer/CardContainer'
     )
   }
 }
-
-// render(<Root />, document.getElementById('main'))
