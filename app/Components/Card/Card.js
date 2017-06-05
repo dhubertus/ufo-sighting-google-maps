@@ -8,8 +8,10 @@ export const Card = ({ id, city, state, summary, month, day, year, shape, url, m
       <h5>{ month + '/' + day + '/' + year }</h5>
       <h3>{ city + ', ' + state}</h3>
       <p><span className='summary'>Summary:</span> { ' ' + summary }</p>
-      <a href={url} target='_blank'>Read More</a>
-      <button onClick={() => sameDay(year, month, day, history)}>Same Day</button>
+      <div className='card-btn-container'>
+        <a href={url} target='_blank'>Read More</a>
+        <button onClick={() => sameDay(year, month, day, history)}>Same Day</button>
+      </div>
       <table>
         <tr>
           <th>Shape</th>

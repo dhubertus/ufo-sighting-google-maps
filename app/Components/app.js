@@ -158,6 +158,7 @@ import { CardContainer } from './CardContainer/CardContainer'
     .then(resp => resp.json())
     .then((obj) => {
       const initialData = initialScrubber(obj)
+      // console.log(this.props.history);
       setTimeout(() => {
         this.setState({ initialSightings: initialData,
                         viewing: initialData,

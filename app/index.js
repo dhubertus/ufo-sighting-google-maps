@@ -15,7 +15,7 @@ import Root from './Components/app.js'
 
 render(
   <Router history={ browserHistory } >
-    <Root />
+    <Root history = { browserHistory }/>
   </Router>,
   document.getElementById('main'),
 )
