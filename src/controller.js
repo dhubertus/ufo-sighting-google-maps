@@ -29,8 +29,18 @@ function rangePlaces(req, res, next) {
   })
 }
 
+function sameDay(req, res, next) {
+  request(BASE_URL + `search?from=${req.query.year}/${req.query.month}/${req.query.day}&to=${req.query.year}/${req.query.month}/${req.query.nextDay}`,
+  function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.send(body)
+    }
+  })
+}
+
 module.exports = {
   getPlaces: getPlaces,
   nearPlaces: nearPlaces,
-  rangePlaces: rangePlaces
+  rangePlaces: rangePlaces,
+  sameDay: sameDay
 };

@@ -13,7 +13,7 @@ describe('Root', () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve()
-      },10000)
+      },2000)
     })
   }
 
@@ -70,10 +70,10 @@ describe('Root', () => {
 
     await waitingFunc()
 
-    console.log(wrapper.state())
 
-    const viewingLength = Object.keys(wrapper.state('viewing')).length
+    const viewingLength = Object.keys(wrapper.state('viewing')) //.length
 
+    console.log(viewingLength)
 
     expect(viewingLength).toEqual(10)
   })
@@ -102,9 +102,4 @@ describe('Root', () => {
     console.log(wrapper.state());
     // console.log(wrapper.nodes[0].props.children);
   })
-
-
-
-
-
 })

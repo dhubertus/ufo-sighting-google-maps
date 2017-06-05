@@ -10,6 +10,8 @@ export const CardContainer = (props) => {
       return (
         <Card key={i}
               deleteFav={props.deleteFav}
+              sameDay={props.sameDay}
+              history={props.history}
               {...props.favorites[key]}
         />
       )
