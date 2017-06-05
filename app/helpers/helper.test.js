@@ -23,6 +23,21 @@ describe('initialScrubber', () => {
 
     expect(result.length).toEqual(50)
   })
+
+  test('object includes the proper keys', () => {
+    const scrubbed = initialScrubber(stubbedData)
+    const result = Object.keys(scrubbed)
+    const singleObj = scrubbed[result[2]]
+    const keys = Object.keys(singleObj)
+
+    const latitude = keys.includes('latitude')
+    const longitude = keys.includes('longitude')
+    const summary = keys.includes('summary')
+
+    expect(latitude).toEqual(true)
+    expect(longitude).toEqual(true)
+    expect(summary).toEqual(true)
+  })
 })
 
 describe('nearScrubber', () => {
@@ -39,6 +54,21 @@ describe('nearScrubber', () => {
     const result = Object.keys(nearScrubber(stubbedNearData))
 
     expect(result.length).toEqual(15)
+  })
+
+  test('object includes the proper keys', () => {
+    const scrubbed = nearScrubber(stubbedNearData)
+    const result = Object.keys(scrubbed)
+    const singleObj = scrubbed[result[8]]
+    const keys = Object.keys(singleObj)
+
+    const latitude = keys.includes('latitude')
+    const longitude = keys.includes('longitude')
+    const summary = keys.includes('summary')
+
+    expect(latitude).toEqual(true)
+    expect(longitude).toEqual(true)
+    expect(summary).toEqual(true)
   })
 })
 
@@ -57,6 +87,15 @@ describe('moonScrubber', () => {
 
     expect(result.length).toEqual(1)
   })
+
+  test('object includes the proper keys', () => {
+    const scrubbed = moonScrubber(moonPhaseStub)
+    const result = Object.keys(scrubbed)
+    const moonPhase = result.includes('moonPhase')
+
+    expect(moonPhase).toEqual(true)
+  })
+
 })
 
 describe('weatherScrubber', () => {
@@ -73,5 +112,18 @@ describe('weatherScrubber', () => {
     const result = Object.keys(weatherScrubber(historicalWeatherStub))
 
     expect(result.length).toEqual(5)
+  })
+
+  test('object includes the proper keys', () => {
+    const scrubbed = weatherScrubber(historicalWeatherStub)
+    const result = Object.keys(scrubbed)
+
+    const humidity = result.includes('humidity')
+    const temperature = result.includes('temperature')
+    const visibility = result.includes('visibility')
+
+    expect(humidity).toEqual(true)
+    expect(temperature).toEqual(true)
+    expect(visibility).toEqual(true)
   })
 })
