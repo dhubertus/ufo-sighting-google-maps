@@ -227,7 +227,7 @@ button {
 }
 
 .individual-card a:visited {
-  color: purple
+  color: #c0d4bc;
 }
 
 table {
@@ -265,6 +265,11 @@ td {
   font-size: 100%;
   height: 38px;
   width: 100px;
+}
+
+.card-btn-container button:hover {
+  color: #6f5a80;
+  background: #c0d4bc;
 }
 
 /*NOTE: Loading CSS*/

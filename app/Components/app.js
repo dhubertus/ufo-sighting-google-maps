@@ -31,7 +31,7 @@ import { CardContainer } from './CardContainer/CardContainer'
 
   handleSameDay(year, month, day, history) {
     const nextDay = (parseInt(day) + 1).toString()
-    console.log(year, month, day, nextDay);
+    
     this.setState({
       loading: true
     })
