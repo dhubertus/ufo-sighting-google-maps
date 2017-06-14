@@ -31,22 +31,24 @@ import { CardContainer } from './CardContainer/CardContainer'
 
   handleSameDay(year, month, day, history) {
     const nextDay = (parseInt(day) + 1).toString()
-    
+
     this.setState({
       loading: true
-    })
-    fetch(`/api/sameDay?year=${year}&month=${month}&day=${day}&nextDay=${nextDay}`)
-    .then((res) => res.json())
-    .then((obj) => {
-      const sameDay = initialScrubber(obj)
+    }, () => {
+      fetch(`/api/sameDay?year=${year}&month=${month}&day=${day}&nextDay=${nextDay}`)
+      .then((res) => res.json())
+      .then((obj) => {
+        const sameDay = initialScrubber(obj)
 
-      setTimeout(() => {
+        // setTimeout(() => {
         this.setState({
           viewing: sameDay,
           loading: false
         })
         history.replace('/')
-      }, 1000)
+        // }, 1000)
+      })
+
     })
   }
 
@@ -111,18 +113,19 @@ import { CardContainer } from './CardContainer/CardContainer'
   handleDecadeClick(lower, upper) {
     const randomNumber = Math.round(Math.random()*350)
 
-    this.setState({ loading: true })
-    fetch(`/api/range?lower=${lower}&upper=${upper}&randomNumber=${randomNumber}`, {
-      method: 'GET'
-    })
-    .then((res) => res.json())
-    .then((obj) => {
-      const scrubbedRange = initialScrubber(obj)
-      setTimeout(() => {
-        this.setState({ nearSightings: scrubbedRange,
-                        viewing: scrubbedRange,
-                        loading: false })
-      }, 1000)
+    this.setState({ loading: true }, () => {
+      fetch(`/api/range?lower=${lower}&upper=${upper}&randomNumber=${randomNumber}`, {
+        method: 'GET'
+      })
+      .then((res) => res.json())
+      .then((obj) => {
+        const scrubbedRange = initialScrubber(obj)
+        setTimeout(() => {
+          this.setState({ nearSightings: scrubbedRange,
+            viewing: scrubbedRange,
+            loading: false })
+          }, 1000)
+        })
     })
   }
 
