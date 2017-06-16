@@ -6,7 +6,7 @@ If you're as skeptical as me, you'll enjoy parsing through these claims and wond
 
 ## Project Screen Shot(s)   
 ## Installation and Setup Instructions
-ie: `git clone, npm start, bower install, etc`  
+git clone, npm install, npm start 
 ## Reflection
   - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
   - What did you set out to build?
