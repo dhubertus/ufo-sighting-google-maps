@@ -1,6 +1,6 @@
 ## Project Name & Pitch
 ## Project Status
-This project is currently in development although the main funcionality has been completed. I am always thinking of new functionality the user may want when diving into the wild world of UFO sightings. Next steps are to learn/add a form of data visualization (ie. chart.js, d3.js, victory.js) that can provide the user data trends. Trends, such as, shapes viewed per decade, or number of sightings over time.
+This project is currently in development although the main funcionality has been completed. When searching for an interesting API I came across plenty of polutant and/or green house gas type API's. Although important, its not the most entertaining  I am always thinking of new functionality the user may want when diving into the wild world of UFO sightings. Next steps are to learn/add a form of data visualization (ie. chart.js, d3.js, victory.js) that can provide the user data trends. Trends, such as, shapes viewed per decade, or number of sightings over time.cccsfd
 
 If you're as skeptical as me, you'll enjoy parsing through these claims and wondering, 'What on Earth could they actually have seen?!?'
 
@@ -8,8 +8,13 @@ If you're as skeptical as me, you'll enjoy parsing through these claims and wond
 ## Installation and Setup Instructions
 git clone --> npm install --> npm start 
 ## Reflection
-  - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
+  - What was the context for this project? 
+  (ie: was this a side project? was this for Turing? was this for an experiment?)
+  This was a 2 week long personal project built during my third module at Turing School of Software and Design.
+  
   - What did you set out to build?
+  Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features. I set out to learn how to implement the Google Maps API within a React application while also hitting other API's for data to display on the map and to experiment with other data visualization (ie. chart.js, d3.js, victory.js). 
+  
   - Why was this project challenging and therefore a really good learning experience?
   - What were some unexpected obstacles?
   - What tools did you use to implement this project?
