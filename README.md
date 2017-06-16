@@ -1,4 +1,4 @@
-## Project Name & Pitch
+## UFO Sightings - Do You Believe?
 ## Project Status
 This project is currently in development although the main funcionality has been completed. When searching for an interesting API I came across plenty of polutant and/or green house gas type API's. Although important, its not the most entertaining data to parse through for weeks. When I cam across the UFO Sightings API in an internet thread, I read a few claims and knew I found my data set which proved to be much larger then I could have imagined. I am always thinking of new functionality the user may want when diving into the wild world of UFO sightings. Next steps are to learn/add a form of data visualization (ie. chart.js, d3.js, victory.js) that can provide the user with data trends. Trends, such as, shapes viewed per decade, or number of sightings over time.
 
