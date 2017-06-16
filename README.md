@@ -14,8 +14,8 @@ git clone --> npm install --> npm start
   One of my main challenges was learning to handle CORS errors by fetching to the backend, where I learned pass user input as parameters, where I would then make a unique request to the API based on the received user input. One unexpected obstacle was learning to implement the Google Maps API in React as google has made its implementation in vanilla javascript very straight forward. After searching for ways to accomplish this task I landed on the react-google-maps package which has decent documentation and allowed for me create a product I am pleased with. In total, the technologies I utilized in this project were React, React-Router 4.0, VanillaJS, JSX, and CSS. I used an express boilerplate to minimize time spent learning to build a backend and focus on the goals I had set for myself. In the future I would enjoy building out a backend from scratch to further understand its process.
      
 ## Resources
-  Google Maps API: https://developers.google.com/maps/documentation/javascript
-  React-Google-Maps: https://www.npmjs.com/package/react-google-maps
-  UFO Sighting API: https://ufo-api.herokuapp.com/api#doc
-  WeatherUndergroundAPI: https://www.wunderground.com/history
+  Google Maps API: https://developers.google.com/maps/documentation/javascript <br/>
+  React-Google-Maps: https://www.npmjs.com/package/react-google-maps <br/>
+  UFO Sighting API: https://ufo-api.herokuapp.com/api#doc <br/>
+  WeatherUndergroundAPI: https://www.wunderground.com/history <br/>
   Astronomical API: http://aa.usno.navy.mil/data/docs/api.php
