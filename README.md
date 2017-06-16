@@ -1,6 +1,9 @@
 ## Project Name & Pitch
 ## Project Status
-(ie: This project is currently in development. Currently this is the working functionality, next steps include blah blah blah)
+This project is currently in development although the main funcionality has been completed. I am always thinking of new functionality the user may want when diving into the wild world of UFO sightings. Next steps are to learn/add a form of data visualization (ie. chart.js, d3.js, victory.js) that can provide the user data trends. Trends, such as, shapes viewed per decade, or number of sightings over time.
+
+If you're as skeptical as me, you'll enjoy parsing through these claims and wondering, 'What on Earth could they actually have seen?!?'
+
 ## Project Screen Shot(s)   
 ## Installation and Setup Instructions
 ie: `git clone, npm start, bower install, etc`  
