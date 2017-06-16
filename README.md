@@ -1,8 +1,8 @@
 ## UFO Sightings - Do You Believe?
 ## Project Status
-This project is currently in development although the main funcionality has been completed. When searching for an interesting API I came across plenty of polutant and/or green house gas type API's. Although important, its not the most entertaining data to parse through for weeks. When I came across the UFO Sightings API in an internet thread, I read a few claims and knew I found my data set which proved to be much larger then I could have imagined. I am always thinking of new functionality the user may want when diving into the wild world of UFO sightings. Next steps are to learn/add a form of data visualization (ie. chart.js, d3.js, victory.js) that can provide the user with data trends. Trends, such as, shapes viewed per decade, or number of sightings over time.
+This project is currently in development although the main funcionality has been completed. When searching for an interesting API that contains lat/long data, I came across plenty of polutant and/or green house gas type API's. Although important, its not the most entertaining data to parse through for weeks. When I came across the UFO Sightings API in an internet thread, I read a few claims and knew I found my data set which proved to be much larger then I could have imagined. I am always thinking of new functionality the user may want when diving into the wild world of UFO sightings. Next steps are to learn/add a form of data visualization (ie. chart.js, d3.js, victory.js) that can provide the user with data trends. Trends, such as, shapes viewed per decade, or number of sightings over time.
 
-If you're as skeptical as me, you'll enjoy parsing through these claims and wondering, 'What on Earth could they actually have seen?!?'
+If you're as skeptical as me or even if you believe, you'll enjoy parsing through these claims and wondering, 'What on Earth could they actually have seen?!?'
 
 ## Project Screen Shot
 <img width="1273" alt="ufo-sighting copy" src="https://user-images.githubusercontent.com/25044263/27244243-e644414c-52a2-11e7-96fe-36943ee2fc3b.png">
