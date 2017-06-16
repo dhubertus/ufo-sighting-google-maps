@@ -4,7 +4,8 @@ This project is currently in development although the main funcionality has been
 
 If you're as skeptical as me, you'll enjoy parsing through these claims and wondering, 'What on Earth could they actually have seen?!?'
 
-## Project Screen Shot(s)   
+## Project Screen Shot
+<img width="1273" alt="ufo-sighting copy" src="https://user-images.githubusercontent.com/25044263/27244243-e644414c-52a2-11e7-96fe-36943ee2fc3b.png">
 ## Installation and Setup Instructions
 git clone --> npm install --> npm start 
 ## Reflection
