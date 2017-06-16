@@ -3,7 +3,7 @@ const BASE_URL = 'https://ufo-api.herokuapp.com/api/sightings/'
 
 
 function getPlaces(req, res, next) {
-  request(BASE_URL + `location/bbox?bbox=-124.848974,24.396308,-66.885444,49.384358&limit=100&skip=${req.query.randomNumber}`,
+  request(BASE_URL + `location/bbox?bbox=-124.848974,24.396308,-66.885444,49.384358&limit=75&skip=${req.query.randomNumber}`,
   function (error, response, body) {
     if (!error && response.statusCode == 200) {
       res.send(body)
