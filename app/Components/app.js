@@ -178,7 +178,7 @@ import { CardContainer } from './CardContainer/CardContainer'
 
     if(this.state.loading) {
 
-      const randomNumber = Math.ceil(Math.random()*14)
+      const randomNumber = Math.ceil(Math.random()*18)
       return (
         <div id='loading-container'>
           <img src={`../assets/styles/images/${randomNumber}.gif`}/>
