@@ -79,14 +79,11 @@ import { CardContainer } from './CardContainer/CardContainer'
     let moonPhaseObj;
     let historicalWeatherObj;
 
-
-
     fetch(`https://api.usno.navy.mil/rstt/oneday?date=${month}/${day}/${year}&coords=${latitude},${longitude}&tz=1`)
     .then((res) => res.json())
     .then((obj) => {
       moonPhaseObj = moonScrubber(obj)
     })
-
 
     fetch(`https://api.wunderground.com/api/be16da1d1979f7aa/history_${year}${month}${day}/q/${state}/${city}.json`)
     .then((res) => res.json())
